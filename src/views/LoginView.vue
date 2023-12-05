@@ -23,9 +23,12 @@ function login() {
     password: password.value,
   }
 
-  axios.post("http://backend.aula-pratica.test/api/login", params)
+  axios.get("http://backend.aula-pratica.test/sanctum/csrf-cookie")
     .then(() => {
-     correctCredentials.value = true
+      axios.post("http://backend.aula-pratica.test/api/login", params)
+      .then(() => {
+        correctCredentials.value = true
+      })
     })
 }
 
